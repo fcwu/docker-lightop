@@ -81,7 +81,7 @@ api.user_list = function(callback) {
 }
 
 // account: add user
-api.user_add = function(username, password) {
+api.user_add = function(username, password, callback) {
   $.ajax({
       url: '/user/',
       type: 'POST',
@@ -93,6 +93,8 @@ api.user_add = function(username, password) {
     .done(function(response) {
       json = JSON.parse(response);
       //console.info(json);
+
+      callback();
     })
     .fail(function(response) {
       console.info(response.status + ': ' + response.statusText);
@@ -100,7 +102,7 @@ api.user_add = function(username, password) {
 }
 
 // account: delete user
-api.user_delete = function(id) {
+api.user_delete = function(id, callback) {
   $.ajax({
       url: '/user/' + id,
       type: 'DELETE'
@@ -108,6 +110,52 @@ api.user_delete = function(id) {
     .done(function(response) {
       json = JSON.parse(response);
       //console.info(json);
+
+      callback();
+    })
+    .fail(function(response) {
+      console.info(response.status + ': ' + response.statusText);
+    });
+}
+
+// container: get container list
+api.container_list = function(callback) {
+  $.ajax({
+      url: '/container/',
+      type: 'GET'
+  })
+    .done(function(response) {
+      var container_list = [];
+
+      json = JSON.parse(response);
+      //console.info(json);
+
+      $.each(json, function(idx, container) {
+        container_list.push({
+          'id': container.id,
+          'session': container.session,
+          'owner': container.owner
+        });
+      });
+
+      callback(container_list);
+    })
+    .fail(function(response) {
+      console.info(response.status + ': ' + response.statusText);
+    });
+}
+
+// account: delete container
+api.container_delete = function(id, callback) {
+  $.ajax({
+      url: '/container/' + id,
+      type: 'DELETE'
+  })
+    .done(function(response) {
+      json = JSON.parse(response);
+      //console.info(json);
+
+      callback();
     })
     .fail(function(response) {
       console.info(response.status + ': ' + response.statusText);

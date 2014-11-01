@@ -42,7 +42,8 @@
     </nav>
 
     <div class="container">
-      <div class="table-responsive" id="layout-account">
+      <!-- [Modal Collection] -->
+      <div>
         <!-- [Modal: login] -->
         <div>
           <div class="modal fade" id="login-modal">
@@ -146,7 +147,7 @@
                 </div>
                 <div class="modal-body">
                   <input type="hidden" id="del-user-id">
-                  <p>Username</p>
+                  Username: <p></p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -157,7 +158,33 @@
           </div><!-- /.modal -->
         </div>
 
-        <!-- [Account] -->
+        <!-- [Modal: delete container] -->
+        <div>
+          <div class="modal fade" id="del-container-modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <h4 class="modal-title">Delete Container</h4>
+                </div>
+                <div class="modal-body">
+                  <input type="hidden" id="del-container-id">
+                  Container: <p></p>
+                  Session: <p></p>
+                  Owner: <p></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="btn-del-container">Delete</button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+          </div><!-- /.modal -->
+        </div>
+      </div>
+
+      <!-- [Account Page] -->
+      <div class="table-responsive" id="layout-account">
         <button type="button" class="btn btn-default pull-right" style="margin: 15px 0 15px 0;" data-toggle="modal" data-target="#add-user-modal">Add</button>
 
         <table class="table table-bordered table-striped">
@@ -177,21 +204,20 @@
         </table>
       </div>
 
-      <!-- [Container] -->
+      <!-- [Container Page] -->
       <div class="table-responsive container-block" id="layout-container">
         <table class="table table-bordered table-striped">
           <thead>
             <tr>
-              <th>#</th>
               <th>Container</th>
-              <th>Image</th>
+              <th>Session</th>
               <th>Owner</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody id="tbody-container">
             <tr>
-              <td colspan="5" align="center">No data</td>
+              <td colspan="4" align="center">No data</td>
             </tr>
           </tbody>
         </table>
@@ -243,6 +269,7 @@
       ui.do_switch_navbar();
       api.session_list(ui.bind_login_session);
       api.user_list(ui.bind_user_data);
+      api.container_list(ui.bind_container_data);
 
       $('#login-modal').modal();
     </script>

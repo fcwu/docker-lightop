@@ -45,16 +45,51 @@ ui.bind_user_data = function(user_list) {
   $('button.btn-remove-user').on('click', null, ui.model_delete_user);
 }
 
+// ui: bind container data
+ui.bind_container_data = function(container_list) {
+  var container_rows = '';
+
+  $.each(container_list, function(idx, container) {
+    container_rows += '<tr>';
+    container_rows += '<td>' + container.id + '</td>';
+    container_rows += '<td>' + container.session + '</td>';
+    container_rows += '<td>' + container.owner + '</td>';
+    container_rows += '<td><button type="button" class="btn btn-default btn-remove-container">Remove</button></td>';
+    container_rows += '</tr>';
+  });
+
+  $('#tbody-container').html(container_rows);
+
+  $('button.btn-remove-container').on('click', null, ui.model_delete_container);
+}
+
 // ui: open delete user modal
 ui.model_delete_user = function() {
-  target_td = $(this).closest('td').prev('td').prev('td');
+  var dom_selector = $(this).closest('td').prev('td').prev('td');
 
-  var username = target_td.text();
-  var user_id = target_td.prev('td').text();
+  var user_id = dom_selector.prev('td').text();
+  var username = dom_selector.text();
 
   $("#del-user-modal .modal-body > p").text(username);
   $("#del-user-id").val(user_id);
   $('#del-user-modal').modal('show');
+}
+
+// ui: open delete container modal
+ui.model_delete_container = function() {
+  var dom_selector = $(this).closest('td').prev('td');
+
+  var container_id = dom_selector.prev('td').prev('td').text();
+  var session = dom_selector.prev('td').text();
+  var owner = dom_selector.text();
+
+  dom_selector = $("#del-container-modal .modal-body > p");
+  dom_selector.text(container_id);
+  dom_selector.next('p').text(session);
+  dom_selector.next('p').next('p').text(owner);
+
+  $("#del-container-id").val(container_id);
+  $('#del-container-modal').modal('show');
 }
 
 // ui: do switch navbar
@@ -120,22 +155,35 @@ ui.do_add_user = function() {
 
   // TODO: check is username existed
 
-  api.user_add(username, password);
-
-  // TODO: check add user correctly (callback)
-  api.user_list(ui.bind_user_data);
-  $("#add-username").val('');
-  $("#add-password").val('');
-  $('#add-user-modal').modal('hide');
+  api.user_add(username, password, ui.do_refresh_user_list);
 }
 
 // ui: do delete user
 ui.do_delete_user = function() {
   var user_id = $("#del-user-id").val();
 
-  api.user_delete(user_id);
+  api.user_delete(user_id, ui.do_refresh_user_list);
+}
 
-  // TODO: check delete user correctly (callback)
+// ui: do refresh user list
+ui.do_refresh_user_list = function() {
+  // TODO: check add/delete user correctly
+
   api.user_list(ui.bind_user_data);
   $('#del-user-modal').modal('hide');
+}
+
+// ui: do delete container
+ui.do_delete_container = function() {
+  var container_id = $("#del-container-id").val();
+
+  api.container_delete(container_id, ui.do_refresh_container_list);
+}
+
+// ui: do refresh container list
+ui.do_refresh_container_list = function() {
+  // TODO: check delete container correctly
+
+  api.container_list(ui.bind_container_data);
+  $('#del-container-modal').modal('hide');
 }

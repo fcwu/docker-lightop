@@ -12,3 +12,4 @@ $(".dropdown-menu").on('click', 'li a', function() {
 $('#btn-sign-in').on('click', null, ui.do_user_login);
 $('#btn-add-user').on('click', null, ui.do_add_user);
 $('#btn-del-user').on('click', null, ui.do_delete_user);
+$('#btn-del-container').on('click', null, ui.do_delete_container);
