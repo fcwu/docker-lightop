@@ -44,8 +44,8 @@ from db.sql import User as DbUser
 
 
 CHUNK_SIZE = 1024
-CID2IMAGE = {'ubuntu-trusty-ttyjs': 'dorowu/ubuntu-trusty-ttyjs:v1',
-             'ubuntu-trusty-lxde': 'dorowu/ubuntu-trusty-lxde:v1'}
+CID2IMAGE = {'ubuntu-trusty-ttyjs': 'dorowu/lightop-ubuntu-trusty-ttyjs',
+             'ubuntu-trusty-lxde': 'dorowu/lightop-ubuntu-trusty-lxde'}
 RE_OWNER_CNAME = re.compile('^/(.*)_({})$'.format('|'.join(CID2IMAGE.keys())))
 
 
