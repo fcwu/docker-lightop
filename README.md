@@ -1,6 +1,13 @@
 Docker Lightop
 ==================
 
+docker-lightop is a login manager for various docker containers(session). Currently, this project provides sessions including,
+
+* [dorowu/lightop-ubuntu-trusty-ttyjs](https://registry.hub.docker.com/u/dorowu/lightop-ubuntu-trusty-ttyjs/): a text-mode login interface for Ubuntu 14.04
+* [dorowu/lightop-ubuntu-trusty-lxde](https://registry.hub.docker.com/u/dorowu/lightop-ubuntu-trusty-lxde/): a LXDE login interface for Ubuntu 14.04
+
+When user login to the session, the container, if not exist, will be created immediatey. The user home folder(~) in every containers of the same user will be mounted to the same volume. The public folder located at /mnt/public, which shares to the all users of this service.
+
 Build and Run
 ---------------
 
@@ -22,7 +29,21 @@ Browse
 
 ```
 http://$IP:6050/
-```
+``` 
+that default account is admin/admin
+
+Screenshot
+-----------------------
+
+<img src="https://raw.github.com/fcwu/docker-lightop/master/screenshots/s-login.png" width=400/>
+
+<img src="https://raw.github.com/fcwu/docker-lightop/master/screenshots/s-ttyjs.png" width=400/>
+
+<img src="https://raw.github.com/fcwu/docker-lightop/master/screenshots/s-lxde.png" width=400/>
+
+<img src="https://raw.github.com/fcwu/docker-lightop/master/screenshots/s-admin-user.png" width=400/>
+
+<img src="https://raw.github.com/fcwu/docker-lightop/master/screenshots/s-admin-ct.png" width=400/>
 
 API
 -----------------------
