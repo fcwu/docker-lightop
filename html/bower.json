@@ -1,0 +1,9 @@
+{
+  "name": "html",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.0",
+    "bootstrapvalidator": "~0.5.2",
+    "jquery-sapzxc-hashchange": "master"
+  }
+}
