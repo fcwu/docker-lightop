@@ -11,7 +11,7 @@ ui.bind_login_session = function(session_list) {
     'value': 'admin-panel'
   });
 
-  if ($('#login-session').val() == '') {
+  if ($('#login-session').val() == '' || $('#login-session-name').text().trim() == '') {
     $('#login-session-name').text(session_list[0].name);
     $('#login-session').val(session_list[0].value);
   }
@@ -36,9 +36,18 @@ ui.bind_user_data = function(user_list) {
     account_rows += '<td>' + user.id + '</td>';
     account_rows += '<td>' + user.name + '</td>';
     account_rows += '<td>' + user.volume.join('<br />') + '</td>';
-    account_rows += '<td><button type="button" class="btn btn-default btn-remove-user">Remove</button></td>';
+    if (user.name == 'admin') {
+      account_rows += '<td><button type="button" class="btn btn-default" disabled="disabled">Remove</button></td>';
+    }
+    else {
+      account_rows += '<td><button type="button" class="btn btn-default btn-remove-user">Remove</button></td>';
+    }
     account_rows += '</tr>';
   });
+
+  if (account_rows == '') {
+    account_rows = '<tr><td colspan="4" align="center">No data</td></tr>';
+  }
 
   $('#tbody-account').html(account_rows);
 
@@ -57,6 +66,10 @@ ui.bind_container_data = function(container_list) {
     container_rows += '<td><button type="button" class="btn btn-default btn-remove-container">Remove</button></td>';
     container_rows += '</tr>';
   });
+
+  if (container_rows == '') {
+    container_rows = '<tr><td colspan="4" align="center">No data</td></tr>';
+  }
 
   $('#tbody-container').html(container_rows);
 
