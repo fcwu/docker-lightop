@@ -1,12 +1,14 @@
 Docker Lightop
 ==================
 
-docker-lightop is a login manager for various docker containers(session). Currently, this project provides sessions including,
+docker-lightop is a login manager for various sessions, which are docker containers that provides their own web interface. Currently, this project provides sessions including,
 
 * [dorowu/lightop-ubuntu-trusty-ttyjs](https://registry.hub.docker.com/u/dorowu/lightop-ubuntu-trusty-ttyjs/): a text-mode login interface for Ubuntu 14.04
 * [dorowu/lightop-ubuntu-trusty-lxde](https://registry.hub.docker.com/u/dorowu/lightop-ubuntu-trusty-lxde/): a LXDE login interface for Ubuntu 14.04
 
 When user login to the session, the container, if not exist, will be created immediatey. The user home folder(~) in every containers of the same user will be mounted to the same volume. The public folder located at /mnt/public, which shares to the all users of this service.
+
+docker-lightop will help to route the network traffic, either http or websocket, to specific container accroding to the URL. For example, docker-lightop routes the request http://$IP:$PORT/u/ubuntu-trusty-ttyjs/ to the IP address of container named `$USER_ubuntu-trusty-ttyjs`, where the service port is retrieved by image `expose` configuration of the image.
 
 Build and Run
 ---------------
