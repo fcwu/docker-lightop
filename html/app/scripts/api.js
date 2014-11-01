@@ -94,7 +94,7 @@ api.user_add = function(username, password, callback) {
       json = JSON.parse(response);
       //console.info(json);
 
-      callback();
+      callback('add');
     })
     .fail(function(response) {
       console.info(response.status + ': ' + response.statusText);
@@ -111,7 +111,7 @@ api.user_delete = function(id, callback) {
       json = JSON.parse(response);
       //console.info(json);
 
-      callback();
+      callback('del');
     })
     .fail(function(response) {
       console.info(response.status + ': ' + response.statusText);

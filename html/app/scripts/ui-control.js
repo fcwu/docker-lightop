@@ -166,11 +166,11 @@ ui.do_delete_user = function() {
 }
 
 // ui: do refresh user list
-ui.do_refresh_user_list = function() {
+ui.do_refresh_user_list = function(action) {
   // TODO: check add/delete user correctly
 
   api.user_list(ui.bind_user_data);
-  $('#del-user-modal').modal('hide');
+  $('#' + action + '-user-modal').modal('hide');
 }
 
 // ui: do delete container
